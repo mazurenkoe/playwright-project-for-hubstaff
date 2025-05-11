@@ -14,6 +14,7 @@ export default class SignupPage extends BasePage {
   readonly passwordFld: Locator = this.page.getByTestId('password');
   readonly acceptTermsCheckbox: Locator = this.page.locator('.hsds-form__checkbox-icon');
   readonly signupBtn: Locator = this.page.getByTestId('create_my_account');
+  readonly cookieOkBtn = this.page.locator('#CybotCookiebotDialogBodyLevelButtonAccept');
 
   readonly verifyEmailPage = new VerifyEmailPage(this.page);
 
@@ -28,6 +29,7 @@ export default class SignupPage extends BasePage {
   }
 
   async fillAndSubmitForm(firstName: string, lastName: string, email: string, password: string) {
+    await this.submitCookie();
     await this.firstNameFld.fill(firstName);
     await this.lastNameFld.fill(lastName);
     await this.emailFld.fill(email);
@@ -35,5 +37,10 @@ export default class SignupPage extends BasePage {
     await this.acceptTermsCheckbox.scrollIntoViewIfNeeded();
     await this.acceptTermsCheckbox.check();
     await this.signupBtn.click();
+  }
+
+  async submitCookie() {
+    await this.cookieOkBtn.click();
+    expect(this.cookieOkBtn, `Cookie bunner hasn't been closed`).toBeHidden();
   }
 }

@@ -12,6 +12,11 @@ test('Sign up for the 14-day free trial', async ({ pages, components }) => {
     ProjectConstants.DEFAULT_PASSWORD
   );
   await pages.verifyEmailPage.assertIsOpened();
+  /* I didn't implement the part with receiving the letter by mail because, to do so, I need to:
+  - Investigate and choose a mail service that supports receiving emails via API.
+  - Request a specific domain address in the mail service that will not be blocked by your website.
+  - Implement an API to work with the mail service in the current framework.
+    This requires a lot of time, and these mail services are paid. */
 });
 
 test('Sig in from the Marketing page navigation bar', async ({ pages, components }) => {

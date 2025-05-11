@@ -8,13 +8,9 @@ export class BasePage {
     this.page = page;
   }
 
-  getBaseUrl() {
-    return 'https://app.hubstaff.com/';
-  }
-
   async openPageUrl(pagePath: string, pageName: string) {
     try {
-      await this.page.goto(this.getBaseUrl() + pagePath);
+      await this.page.goto(pagePath);
     } catch (error) {
       throw new Error(
         `Failed to navigate to "${pageName}" at "${pagePath}": ${error instanceof Error ? error.stack : String(error)}`
